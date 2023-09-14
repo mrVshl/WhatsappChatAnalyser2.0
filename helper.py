@@ -148,7 +148,12 @@ def convertDateTimeFormat(date):
         date_part, time_part = time_str.split(', ')
         parsed_time = datetime.strptime(time_part, '%I:%M %p - ')
         formatted_time = parsed_time.strftime('%H:%M')
-        year = date_part[-2:]
-        result = f'{date_part[:-4]}{year}, {formatted_time} - '
-        dates.append(result)
+        if len(date_part) > 8:
+            year = date_part[-2:]
+            result = f'{date_part[:-4]}{year}, {formatted_time} - '
+            dates.append(result)
+            
+        else:
+            result = f'{date_part}, {formatted_time} - '
+            dates.append(result)
     return dates
