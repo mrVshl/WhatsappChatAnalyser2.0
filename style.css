@@ -1,0 +1,67 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+    padding:0;
+}
+
+div.css-1544g2n{
+    padding: 0rem 1rem 1.5rem;
+}
+
+div.css-1544g2n h1{
+    color: red;
+}
+
+
+
+/* Main container css */
+
+header.css-18ni7ap{
+    background-color: #1dd21d;
+}
+
+div.css-1y4p8pa{
+    top:-5rem;
+}
+
+div.css-1dp5vir{
+    top:-2px;
+}
+
+img, svg{
+    border-radius: 10px;
+    border: 2px solid rgb(145 58 58);
+}
+
+/*starting four columns css */
+
+div.css-12w0qpk{
+    border: 2px solid rgb(145 58 58);
+    border-radius: 10px;
+    background-color: white;
+}
+
+div.css-ocqkz7{
+    text-align: center;
+}
+
+/*div.css-1y4p8pa{
+    padding: 0rem 1rem 10rem;
+}*/
+
+section.css-uf99v8{
+    background-color: #ffeaea;
+}
+
+section.css-f6akn8,section.css-vk3wp9{
+    top: -2px;
+}
+
+
+@media (max-width: 768px){
+section.css-1wyffs1,section.css-1nh454p,section.css-1vfx587,section.css-1hthxn8,section.css-1wu9eic,section.css-qoo1cd{
+    top: -2px;
+    }
+}
