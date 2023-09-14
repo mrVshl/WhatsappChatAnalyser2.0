@@ -1,39 +1,35 @@
 import pandas as pd
 import streamlit as st
+import helper
 import re
 
 #Creating a function that will return preprocessed data
 def preprocess(data):
-    pattern = '\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s-\s'
-    pattern1 = '\d{1,2}\/\d{1,2}\/\d{2},\s\d{1,2}:\d{2}\s(?:am|pm)\s-\s'
+    pattern1 = '\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s-\s'
+    pattern2 = '\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{2}\s(?:am|pm)\s-\s'
+    pattern3 = '\d{1,2}\/\d{1,2}\/\d{2,4},\s\d{1,2}:\d{2}\s(?:AM|PM)\s-\s'
+
 
     format_1 = '%d/%m/%y, %H:%M - '
     format_2 = '%m/%d/%y, %H:%M - '
 
-    match = re.split(pattern, data)[1:]
-    match1 = re.split(pattern1, data)[1:]
+    match1 = re.split(pattern1,data)[1:]
+    match2 = re.split(pattern2,data)[1:] 
+    match3 = re.split(pattern3,data)[1:]
 
-    if match:
-        messages = re.split(pattern, data)[1:]
-        dates = re.findall(pattern, data)
+    if match1:
+        messages = re.split(pattern1,data)[1:]
+        dates = re.findall(pattern1,data)  
 
-    elif match1:
-        messages = re.split(pattern1, data)[1:]
-        date = re.findall(pattern1, data)
-        from datetime import datetime
-        dates = []
-        for time_str in date:
-            # Define a dictionary for AM and PM mappings
-            am_pm_mapping = {'am': 'AM', 'pm': 'PM'}
-            # Split the input time string into date and time parts
-            date_part, time_part = time_str.split(', ')
-            # Parse the date and time parts
-            parsed_time = datetime.strptime(time_part, '%I:%M %p - ')
-            # Convert to 24-hour format
-            formatted_time = parsed_time.strftime('%H:%M')
-            # Combine the date and formatted time
-            result = f'{date_part}, {formatted_time} - '
-            dates.append(result)
+    elif match2:
+        messages = re.split(pattern2,data)[1:]
+        date = re.findall(pattern2,data)
+        dates = helper.convertDateTimeFormat(date)
+
+    elif match3:
+        messages = re.split(pattern3,data)[1:]
+        date = re.findall(pattern3,data)
+        dates = helper.convertDateTimeFormat(date)
 
     else:
         st.markdown("<span style='color: red;'>This File format is not Supported by WhatsApp chat Analyser!!!</span>", unsafe_allow_html=True)

@@ -137,3 +137,24 @@ def activity_heat_map(selected_user,df):
     activity_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
 
     return activity_heatmap
+
+#function for Datapreprocessor file
+
+def convertDateTimeFormat(date):
+    from datetime import datetime
+    dates = []
+    for time_str in date:
+        # Define a dictionary for AM and PM mappings
+        am_pm_mapping = {'am': 'AM', 'pm': 'PM'}
+        # Split the input time string into date and time parts
+        date_part, time_part = time_str.split(', ')
+        # Parse the date and time parts
+        parsed_time = datetime.strptime(time_part, '%I:%M %p - ')
+        # Convert to 24-hour format
+        formatted_time = parsed_time.strftime('%H:%M')
+        # Extract the last two digits of the year (assuming it's at the end of the date)
+        year = date_part[-2:]
+        # Combine the date with the formatted time and the two-digit year
+        result = f'{date_part[:-4]}{year}, {formatted_time} - '
+        dates.append(result)
+    return dates
